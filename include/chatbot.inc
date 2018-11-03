@@ -15,6 +15,9 @@
 		with this program.  If not, see <http://www.gnu.org/licenses/>.
 ==============================================================================*/
 
+#define CHAT_BOT_ERROR (ChatBot:-1)
+
+
 /*
 	Native: ChatBotCreate
 	
@@ -29,6 +32,7 @@
 		- `-1`: If failed to create an instance
 
 */
+
 native ChatBot:ChatBotCreate(path[]);
 
 /*
@@ -47,4 +51,5 @@ native ChatBot:ChatBotCreate(path[]);
 
 */
 native BotResponse(ChatBot:bot,query[],string[],size = sizeof(string));
+
 
