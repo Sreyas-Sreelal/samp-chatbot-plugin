@@ -15,6 +15,36 @@
 		with this program.  If not, see <http://www.gnu.org/licenses/>.
 ==============================================================================*/
 
+/*
+	Native: ChatBotCreate
+	
+	Description:
+		Creates an eliza bot instance and push the instance to global vector
+	
+	Parameters:
+		- `path[]`: string containing path to bot script file
+	
+	Returns:
+		- `0 .. etc`: Pushed instance' index
+		- `-1`: If failed to create an instance
+
+*/
 native ChatBot:ChatBotCreate(path[]);
+
+/*
+	Native: BotResponse
+	
+	Description:
+		Generates a response from the query send to the bot
+	
+	Parameters:
+		- `ChatBot:bot`: Bot instance id
+		- `query[]`: Message to send to user
+		- `string[]`: String to store response from bot
+		- `size`: size of the destination string
+	
+	Returns:`-1`
+
+*/
 native BotResponse(ChatBot:bot,query[],string[],size = sizeof(string));
 
