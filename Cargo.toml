@@ -1,7 +1,7 @@
 [package]
-name = "plugin-template"
+name = "samp-chatbot-plugin"
 version = "0.1.0"
-authors = ["ZOTTCE <zottce@gmail.com>"]
+authors = ["Sreyas <sreyassreelal@gmail.com>"]
 
 [lib]
 crate-type = ["dylib"]
