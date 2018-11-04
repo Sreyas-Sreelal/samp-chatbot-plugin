@@ -47,7 +47,9 @@ native ChatBot:ChatBotCreate(path[]);
 		- `string[]`: String to store response from bot
 		- `size`: size of the destination string
 	
-	Returns:`-1`
+	Returns:
+		- `1`: Success
+		- `0`: Failed
 
 */
 native BotResponse(ChatBot:bot,query[],string[],size = sizeof(string));

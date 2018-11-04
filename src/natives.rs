@@ -3,8 +3,8 @@ use samp_sdk::amx::{AmxResult, AMX};
 use eliza::Eliza;
 
 pub trait Natives {
-		fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>;
-		fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>;
+	fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>;
+	fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>;
 }
 
 impl Natives for super::ChatBot{
@@ -49,13 +49,20 @@ impl Natives for super::ChatBot{
 			- `string[]`: String to store response from bot
 			- `size`: size of the destination string
 		
-		Returns: 1
+		Returns:
+			- `1`: Success
+			- `0`: Failed
 
 	*/
 	fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>{
-		let encoded = samp_sdk::cp1251::encode(self.bots[bot].respond(query.as_str()).as_str())?;
-		set_string!(encoded,string,size);
-		Ok(1)
+		if bot < self.bots.len(){	
+			let encoded = samp_sdk::cp1251::encode(self.bots[bot].respond(query.as_str()).as_str())?;
+			set_string!(encoded,string,size);
+			Ok(1)
+		} else{
+			log!("[ChatBotPlugin] Invalid bot instance is passed!");
+			Ok(0)
+		}
 	}
 }
 
