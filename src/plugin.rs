@@ -7,7 +7,6 @@ use natives::Natives;
 define_native!(create,path_to_script:String);
 define_native!(response,bot:usize,query:String,string:ref Cell,size:usize);
 
-
 pub struct ChatBot{
 	pub bots:Vec<Eliza>,
 }
@@ -29,7 +28,7 @@ impl ChatBot {
 		};
 		match amx.register(&natives) {
 			Ok(_) => log!("[ChatBotPlugin] All Natives successfully loaded"),
-			Err(err) => log!("[ChatBotgitPlugin] Failed to register amx instance {:?}", err),
+			Err(err) => log!("[ChatBotPlugin] Failed to register amx instance {:?}", err),
 		}
 
 		AMX_ERR_NONE
