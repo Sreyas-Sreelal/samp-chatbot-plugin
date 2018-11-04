@@ -3,8 +3,8 @@ use samp_sdk::amx::{AmxResult, AMX};
 use eliza::Eliza;
 
 pub trait Natives {
-			fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>;
-			fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>;
+		fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>;
+		fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>;
 }
 
 impl Natives for super::ChatBot{
