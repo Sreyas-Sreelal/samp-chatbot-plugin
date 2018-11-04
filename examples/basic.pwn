@@ -18,9 +18,9 @@ public OnFilterScriptInit(){
 
 CMD:say(playerid,params[]){
 	new name[MAX_PLAYER_NAME],msg[128],response[128];
-    GetPlayerName(playerid, name,sizeof(name));
-    format(msg, sizeof(msg),"%s: %s",name,params);
-    SendClientMessageToAll(-1,msg);
+	GetPlayerName(playerid, name,sizeof(name));
+	format(msg, sizeof(msg),"%s: %s",name,params);
+	SendClientMessageToAll(-1,msg);
 
 	if(BotResponse(bot,params,response)){
 		format(response,sizeof(response),RED "Bot:" WHITE " %s",response);
