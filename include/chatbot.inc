@@ -15,6 +15,15 @@
 		with this program.  If not, see <http://www.gnu.org/licenses/>.
 ==============================================================================*/
 
+#if defined _inc_CHATBOT
+	#undef _inc_CHATBOT
+#endif
+// custom include-guard
+#if defined _CHATBOT_included
+	#endinput
+#endif
+#define _CHATBOT_included
+
 #define CHAT_BOT_ERROR (ChatBot:-1)
 
 
