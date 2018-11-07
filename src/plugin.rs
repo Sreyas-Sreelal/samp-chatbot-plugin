@@ -6,6 +6,8 @@ use natives::Natives;
 
 define_native!(create,path_to_script:String);
 define_native!(response,bot:usize,query:String,string:ref Cell,size:usize);
+define_native!(greet,bot:usize,message:ref Cell,size:usize);
+define_native!(farewell,bot:usize,message:ref Cell,size:usize);
 
 pub struct ChatBot{
 	pub bots:Vec<Eliza>,
@@ -24,7 +26,9 @@ impl ChatBot {
 	pub fn amx_load(&mut self, amx: &mut AMX) -> Cell {
 		let natives = natives!{
 			"ChatBotCreate" => create,
-			"BotResponse" => response
+			"BotResponse" => response,
+			"BotGreet" => greet,
+			"BotFarwell" => farewell
 		};
 		match amx.register(&natives) {
 			Ok(_) => log!("[ChatBotPlugin] All Natives successfully loaded"),

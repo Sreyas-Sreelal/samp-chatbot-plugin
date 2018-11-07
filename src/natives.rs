@@ -4,7 +4,10 @@ use eliza::Eliza;
 
 pub trait Natives {
 	fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>;
-	fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>;
+	fn response(&mut self,_:&AMX,bot:usize,query:String,string:&mut Cell,size:usize) -> AmxResult<Cell>;
+	fn farewell(&mut self, _:&AMX,bot:usize,message:&mut Cell,size:usize) -> AmxResult<Cell>;
+	fn greet(&mut self,_:&AMX,bot:usize,message:&mut Cell,size:usize) -> AmxResult<Cell>;
+	
 }
 
 impl Natives for super::ChatBot{
@@ -23,6 +26,7 @@ impl Natives for super::ChatBot{
 			- `-1`: If failed to create an instance
 
 	*/
+
 	fn create(&mut self,_:&AMX,path_to_script:String) -> AmxResult<Cell>{
 		let full_path = "scripts/".to_owned() + path_to_script.as_str();
 		match Eliza::new(full_path.as_str()) {
@@ -54,12 +58,68 @@ impl Natives for super::ChatBot{
 			- `0`: Failed
 
 	*/
+	
 	fn response(&mut self,_:&AMX,bot:usize,query:String, string:&mut Cell,size:usize) -> AmxResult<Cell>{
-		if bot < self.bots.len(){	
+		if bot < self.bots.len() {	
 			let encoded = samp_sdk::cp1251::encode(self.bots[bot].respond(query.as_str()).as_str())?;
 			set_string!(encoded,string,size);
 			Ok(1)
 		} else{
+			log!("[ChatBotPlugin] Invalid bot instance is passed!");
+			Ok(0)
+		}
+	}
+
+	/*
+		Native: BotFarewell
+		
+		Description:
+			Randomly selects a farewell statement from the farewell list in the script.
+		
+		Parameters:
+			- `ChatBot:bot`: Bot instance id
+			- `message[]`: String to store response from bot
+		
+		Returns:
+			- `1`: Success
+			- `0`: Failed
+
+	*/
+
+	fn farewell(&mut self, _:&AMX,bot:usize,message:&mut Cell,size:usize) -> AmxResult<Cell>{
+		if bot < self.bots.len(){
+			let encoded = samp_sdk::cp1251::encode(self.bots[bot].farewell().as_str())?;
+			set_string!(encoded,message,size);
+			Ok(1)
+		}else{
+			log!("[ChatBotPlugin] Invalid bot instance is passed!");
+			Ok(0)
+		}
+	}
+
+
+	/*
+		Native: BotGreet
+		
+		Description:
+			Randomly selects a greeting statement from the greetings list in the script.
+		
+		Parameters:
+			- `ChatBot:bot`: Bot instance id
+			- `message[]`: String to store response from bot
+
+		Returns:
+			- `1`: Success
+			- `0`: Failed
+
+	*/
+
+	fn greet(&mut self, _:&AMX,bot:usize,message:&mut Cell,size:usize) -> AmxResult<Cell>{
+		if bot < self.bots.len(){
+			let encoded = samp_sdk::cp1251::encode(self.bots[bot].greet().as_str())?;
+			set_string!(encoded,message,size);
+			Ok(1)
+		}else{
 			log!("[ChatBotPlugin] Invalid bot instance is passed!");
 			Ok(0)
 		}
