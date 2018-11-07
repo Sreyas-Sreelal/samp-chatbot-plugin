@@ -54,4 +54,39 @@ native ChatBot:ChatBotCreate(path[]);
 */
 native BotResponse(ChatBot:bot,query[],string[],size = sizeof(string));
 
+/*
+	Native: BotGreet
+	
+	Description:
+		Randomly selects a greeting statement from the greetings list in the script.
+	
+	Parameters:
+		- `ChatBot:bot`: Bot instance id
+		- `message[]`: String to store response from bot
+
+	Returns:
+		- `1`: Success
+		- `0`: Failed
+
+*/
+native BotGreet(ChatBot:bot,message[],size=sizeof(message));
+
+/*
+	Native: BotFarewell
+	
+	Description:
+		Randomly selects a farewell statement from the farewell list in the script.
+	
+	Parameters:
+		- `ChatBot:bot`: Bot instance id
+		- `message[]`: String to store response from bot
+	
+	Returns:
+		- `1`: Success
+		- `0`: Failed
+
+*/
+native BotFarewell(Chatbot:bot,message[],size=sizeof(message));
+
+
 
